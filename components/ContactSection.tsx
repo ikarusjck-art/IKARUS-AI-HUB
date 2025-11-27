@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User as UserIcon, Loader2, Mail, MessageSquare } from 'lucide-react';
+import { Send, Bot, User as UserIcon, Loader2, Mail, Phone, MapPin } from 'lucide-react';
 import { ChatMessage, ChatRole } from '../types';
 import { sendMessageToGemini } from '../services/geminiService';
 
@@ -42,7 +42,7 @@ const ContactSection: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 pb-24 pt-8">
+    <div className="w-full max-w-5xl mx-auto px-4 pb-24 pt-8">
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-2">Get in Touch</h2>
         <p className="text-gray-600">문의사항이 있거나 AI의 도움이 필요하신가요?</p>
@@ -56,7 +56,7 @@ const ContactSection: React.FC = () => {
               activeTab === 'form' ? 'bg-primary text-white shadow-md' : 'text-gray-600 hover:bg-white/50'
             }`}
           >
-            <span className="flex items-center gap-2"><Mail size={16}/> Email Us</span>
+            <span className="flex items-center gap-2"><Mail size={16}/> Contact Us</span>
           </button>
           <button
             onClick={() => setActiveTab('chat')}
@@ -69,32 +69,75 @@ const ContactSection: React.FC = () => {
         </div>
       </div>
 
-      <div className="glass-card rounded-3xl overflow-hidden min-h-[500px] flex flex-col relative">
+      <div className="glass-card rounded-3xl overflow-hidden min-h-[550px] flex flex-col relative shadow-xl">
         {activeTab === 'form' ? (
-          <div className="p-8 md:p-12 flex-1 flex flex-col justify-center">
-             <form className="space-y-6 max-w-lg mx-auto w-full" onSubmit={(e) => e.preventDefault()}>
-               <div>
-                 <label className="block text-sm font-medium text-gray-700 mb-1">이름</label>
-                 <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none bg-white/50" placeholder="홍길동 연구원" />
+          <div className="flex flex-col md:flex-row h-full">
+            {/* Left Column: Contact Info */}
+            <div className="p-8 md:p-10 bg-gradient-to-br from-white/60 to-white/30 md:w-5/12 border-b md:border-b-0 md:border-r border-white/40 flex flex-col justify-center">
+               <h3 className="text-2xl font-bold text-gray-800 mb-4">Contact Info</h3>
+               <p className="text-sm text-gray-600 mb-8 leading-relaxed font-medium">
+                 연구하시다가 막히는 부분이 있거나,<br/>
+                 새로운 아이디어에 대해 가볍게 이야기 나누고 싶다면 언제든 연락주세요.
+               </p>
+               
+               <div className="space-y-8">
+                  <div className="flex items-start gap-4">
+                     <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-primary flex-shrink-0 mt-0.5">
+                       <Mail size={20} />
+                     </div>
+                     <div>
+                       <h4 className="font-bold text-gray-700 text-sm mb-1">Email</h4>
+                       <p className="text-sm text-gray-600">ikarusjck@gmail.com</p>
+                       <p className="text-sm text-gray-600">ckjang@samhwa.com (사내)</p>
+                     </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                     <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-primary flex-shrink-0 mt-0.5">
+                       <Phone size={20} />
+                     </div>
+                     <div>
+                       <h4 className="font-bold text-gray-700 text-sm mb-1">Phone</h4>
+                       <p className="text-sm text-gray-600 font-medium">010-5618-1345</p>
+                       <p className="text-xs text-gray-500 mt-1 leading-snug">평일 09:00 - 18:00<br/>(회의 중에는 통화가 어렵습니다)</p>
+                     </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                     <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-primary flex-shrink-0 mt-0.5">
+                       <MapPin size={20} />
+                     </div>
+                     <div>
+                       <h4 className="font-bold text-gray-700 text-sm mb-1">Office</h4>
+                       <p className="text-sm text-gray-600 break-keep leading-snug">경기도 안산시 단원구 별망로 178 (성곡동)</p>
+                     </div>
+                  </div>
                </div>
-               <div>
-                 <label className="block text-sm font-medium text-gray-700 mb-1">이메일</label>
-                 <input type="email" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none bg-white/50" placeholder="example@samhwa.com" />
-               </div>
-               <div>
-                 <label className="block text-sm font-medium text-gray-700 mb-1">메시지</label>
-                 <textarea rows={4} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none bg-white/50 resize-none" placeholder="문의 내용을 입력해주세요." />
-               </div>
-               <button className="w-full bg-primary text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition-colors shadow-lg shadow-primary/30">
-                 보내기
-               </button>
-             </form>
-             <div className="mt-8 text-center text-sm text-gray-500">
-               <p>사내 메신저: @IKARUS_TF</p>
-             </div>
+            </div>
+
+            {/* Right Column: Form */}
+            <div className="p-8 md:p-12 md:w-7/12 flex flex-col justify-center bg-white/20">
+               <form className="space-y-5 w-full" onSubmit={(e) => e.preventDefault()}>
+                 <div>
+                   <label className="block text-sm font-bold text-gray-700 mb-1.5">이름</label>
+                   <input type="text" className="w-full px-4 py-3 rounded-xl border border-white/60 focus:ring-2 focus:ring-primary focus:border-transparent outline-none bg-white/60 shadow-sm transition-all text-gray-700 placeholder-gray-400" placeholder="홍길동 연구원" />
+                 </div>
+                 <div>
+                   <label className="block text-sm font-bold text-gray-700 mb-1.5">이메일</label>
+                   <input type="email" className="w-full px-4 py-3 rounded-xl border border-white/60 focus:ring-2 focus:ring-primary focus:border-transparent outline-none bg-white/60 shadow-sm transition-all text-gray-700 placeholder-gray-400" placeholder="example@samhwa.com" />
+                 </div>
+                 <div>
+                   <label className="block text-sm font-bold text-gray-700 mb-1.5">메시지</label>
+                   <textarea rows={4} className="w-full px-4 py-3 rounded-xl border border-white/60 focus:ring-2 focus:ring-primary focus:border-transparent outline-none bg-white/60 resize-none shadow-sm transition-all text-gray-700 placeholder-gray-400" placeholder="문의 내용을 입력해주세요." />
+                 </div>
+                 <button className="w-full bg-gradient-to-r from-primary to-blue-600 text-white font-bold py-3.5 rounded-xl hover:shadow-lg hover:scale-[1.02] transition-all shadow-md mt-2">
+                   보내기
+                 </button>
+               </form>
+            </div>
           </div>
         ) : (
-          <div className="flex flex-col h-[600px] md:h-[500px]">
+          <div className="flex flex-col h-[600px] md:h-[550px]">
             {/* Chat Area */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-white/30">
               {messages.map((msg, idx) => (

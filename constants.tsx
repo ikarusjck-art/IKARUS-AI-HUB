@@ -4,14 +4,22 @@ import { TimelineEvent, GalleryItem } from './types';
 
 export const APP_NAME = "IKARUS AI Hub";
 
-// Image Assets (using the ones provided in prompt or high quality placeholders)
+// Image Assets
 export const IMAGES = {
   PROFILE: "https://loremflickr.com/800/800/artificial_intelligence,robot/all",
-  HERO_BG: "https://loremflickr.com/1600/900/technology,abstract/all",
+  // Updated to a darker, more atmospheric background for the new design
+  HERO_BG: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop", 
   GALLERY_1: "https://loremflickr.com/800/600/workshop,office/all",
   GALLERY_2: "https://loremflickr.com/800/600/computer,code/all",
   GALLERY_3: "https://loremflickr.com/800/600/team,success/all",
   GALLERY_4: "https://loremflickr.com/800/600/seminar,presentation/all",
+};
+
+export const HERO_TEXTS = {
+  badge: "SYSTEM: ONLINE // CHEM_AI_V2.0",
+  title: "우리 연구소를 위한\n생성형 AI 활용 가이드",
+  desc: "삼화페인트 후배님들과 동료 연구원들을 위해 준비했습니다.\n낯선 생성형 AI를 연구와 실무에 어떻게 녹여낼지 함께 고민하고,\n지식의 나눔을 통해 더 높이 성장하는 계기를 만들어갑시다.",
+  notification: "[공지] 다음 주 수요일 점심시간에 '프롬프트 엔지니어링 기초' 미니 세미나가 있습니다."
 };
 
 export const NAV_ITEMS = [
@@ -62,6 +70,33 @@ export const GALLERY_DATA: GalleryItem[] = [
   { id: 2, url: IMAGES.GALLERY_2, title: "프롬프트 연구 세션", category: "R&D" },
   { id: 3, url: IMAGES.GALLERY_3, title: "해커톤 우승팀", category: "Community" },
   { id: 4, url: IMAGES.GALLERY_4, title: "사내 세미나 발표", category: "Education" },
+];
+
+export const USE_CASES = [
+  {
+    id: 1,
+    noteId: "STUDY NOTE 02",
+    category: "2차 전지 소재",
+    title: "MXene 공정 데이터 시각화",
+    desc: "반응 온도와 시간에 따른 물성 변화 데이터를 시각화해보았습니다. 데이터가 쌓이면 불량률 예측도 가능할 것 같습니다.",
+    chartData: [
+      { label: 'SWCNT', value: 85, color: 'bg-[#005e54]' },
+      { label: 'Graphene', value: 65, color: 'bg-[#00695c]' },
+      { label: 'AgNW', value: 45, color: 'bg-[#00796b]' },
+      { label: 'CB', value: 30, color: 'bg-[#00897b]' }
+    ]
+  },
+  {
+    id: 2,
+    noteId: "STUDY NOTE 01",
+    category: "배합 최적화",
+    title: "친환경 페인트 점도 예측 모델",
+    desc: "기존 3년치 배합 데이터를 학습시켜 목표 점도에 도달하기 위한 첨가제 비율을 추천받았습니다. 실험 횟수가 획기적으로 줄어들었습니다.",
+    chartData: [
+      { label: '기존 실험 횟수', value: 100, color: 'bg-gray-400' },
+      { label: 'AI 예측 도입', value: 40, color: 'bg-teal-500' }
+    ]
+  }
 ];
 
 export const KEY_MESSAGES = [
@@ -150,5 +185,56 @@ export const AI_TOOLS = [
     icon: <Languages size={16} />,
     placeholder: "예: 다음 문장을 영어로 번역해줘: '이번 프로젝트의 성공적인 마무리를 축하합니다.'",
     systemPrompt: "당신은 전문 번역가입니다. 입력된 텍스트를 요청된 언어로 자연스럽고 정확하게 번역해주세요. 특별한 언급이 없으면 비즈니스 톤을 유지하세요."
+  }
+];
+
+export const COMMUNITY_CATEGORIES = [
+  { id: 'all', label: '전체보기' },
+  { id: 'efficiency', label: '업무 효율화' },
+  { id: 'creative', label: 'AI 창작물' },
+  { id: 'prompt', label: '프롬프트 공유' },
+  { id: 'free', label: '자유게시판' }
+];
+
+export const COMMUNITY_POSTS = [
+  {
+    id: 1,
+    category: 'creative',
+    catLabel: 'AI 창작물',
+    title: '미드저니로 생성한 미래형 친환경 페인트 컨셉',
+    excerpt: '페인트의 물성을 시각적으로 표현하기 위해 생성형 AI를 활용해봤습니다. "Eco-friendly liquid flow, abstract, 3d render" 키워드를 사용했어요.',
+    author: '김연구',
+    team: '선행연구팀',
+    likes: 0,
+    comments: 1,
+    image: 'https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?q=80&w=2070&auto=format&fit=crop', // Abstract Yellow/Grey wall
+    badgeColor: 'bg-purple-100 text-purple-600',
+    date: '10분 전'
+  },
+  {
+    id: 2,
+    category: 'efficiency',
+    catLabel: '업무 효율화',
+    title: '회의록 자동 요약 프롬프트 공유합니다',
+    excerpt: '긴 회의 내용을 구조화해서 요약해주는 프롬프트입니다. [회의록 내용]을 넣고 이 프롬프트를 쓰면 Action Item까지 뽑아줍니다. 업무 효율이 2배는 좋아진 것 같습니다.',
+    author: '박수석',
+    team: '기술영업팀',
+    likes: 1,
+    comments: 0,
+    badgeColor: 'bg-blue-100 text-blue-600',
+    date: '1시간 전'
+  },
+  {
+    id: 3,
+    category: 'prompt',
+    catLabel: '프롬프트 공유',
+    title: '화학 논문 요약용 System Prompt',
+    excerpt: '영문 화학 논문을 넣으면 핵심 실험 결과와 수치 위주로 요약해주는 프롬프트입니다. 연구소 분들께 도움될 것 같아 공유합니다.',
+    author: '이수석',
+    team: '기반기술팀',
+    likes: 5,
+    comments: 3,
+    badgeColor: 'bg-orange-100 text-orange-600',
+    date: '3시간 전'
   }
 ];

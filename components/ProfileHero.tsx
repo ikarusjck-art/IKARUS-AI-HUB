@@ -1,6 +1,6 @@
 import React from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
-import { IMAGES, KEY_MESSAGES } from '../constants';
+import { ArrowRight } from 'lucide-react';
+import { IMAGES, HERO_TEXTS } from '../constants';
 
 interface ProfileHeroProps {
   onNavigate: (page: string) => void;
@@ -8,56 +8,66 @@ interface ProfileHeroProps {
 
 const ProfileHero: React.FC<ProfileHeroProps> = ({ onNavigate }) => {
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 pb-24 pt-8">
-      {/* Main Profile Card */}
-      <div className="glass-card rounded-3xl p-8 md:p-12 text-center relative overflow-hidden transition-transform hover:scale-[1.01] duration-500">
+    <div className="relative w-full h-screen flex flex-col justify-center items-center overflow-hidden">
+      {/* Background Image with Dark Overlay */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center z-0"
+        style={{ backgroundImage: `url(${IMAGES.HERO_BG})` }}
+      ></div>
+      <div className="absolute inset-0 bg-slate-900/80 z-0"></div>
+      
+      {/* Decorative Radial Gradient */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-teal-500/10 rounded-full blur-[120px] z-0 pointer-events-none"></div>
+
+      {/* Main Content */}
+      <div className="relative z-10 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
         
-        {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-r from-primary/20 to-secondary/20 -z-10" />
-        <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-400/30 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-20 -left-10 w-40 h-40 bg-purple-400/30 rounded-full blur-3xl animate-pulse delay-700" />
-
-        <div className="relative z-10 flex flex-col items-center">
-          <div className="w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-tr from-primary to-secondary shadow-lg mb-6">
-             <img 
-               src={IMAGES.PROFILE} 
-               alt="IKARUS Profile" 
-               className="w-full h-full rounded-full object-cover border-4 border-white"
-             />
+        {/* Status Badge */}
+        <div className="mb-8 animate-fade-in-down">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-teal-500/30 bg-teal-900/30 backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
+            <span className="text-teal-400 text-xs font-bold tracking-widest font-mono">
+              {HERO_TEXTS.badge}
+            </span>
           </div>
-          
-          <h1 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary mb-3">
-            IKARUS
-          </h1>
-          <p className="text-lg md:text-xl text-gray-600 font-medium mb-2">
-            AI Hub for Samhwa Paint
-          </p>
-          <p className="text-gray-500 max-w-lg mx-auto mb-8">
-            생성형 AI로 여는 삼화페인트의 미래.<br/>
-            업무 효율 혁신과 새로운 연구 경험을 제공합니다.
-          </p>
+        </div>
 
+        {/* Headline */}
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight animate-fade-in-up whitespace-pre-wrap">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-200 to-teal-500">
+            {HERO_TEXTS.title}
+          </span>
+        </h1>
+
+        {/* Description */}
+        <p className="text-gray-300 text-lg md:text-xl leading-relaxed mb-12 max-w-3xl whitespace-pre-wrap animate-fade-in-up delay-100">
+          {HERO_TEXTS.desc}
+        </p>
+
+        {/* Buttons */}
+        <div className="flex flex-col md:flex-row gap-6 animate-fade-in-up delay-200">
           <button 
-            onClick={() => onNavigate('about')}
-            className="group bg-primary text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-blue-700 hover:shadow-primary/50 transition-all flex items-center gap-2"
+            onClick={() => onNavigate('lab')}
+            className="group px-8 py-4 bg-teal-500 hover:bg-teal-400 text-slate-900 font-bold rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-[0_0_20px_rgba(20,184,166,0.5)] flex items-center gap-2"
           >
-            시작하기
-            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            START RESEARCH
+            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+          </button>
+          
+          <button 
+            onClick={() => onNavigate('contact')}
+            className="px-8 py-4 bg-transparent border border-slate-600 hover:border-teal-500 text-slate-300 hover:text-white font-medium rounded-lg transition-all duration-300 hover:bg-slate-800/50"
+          >
+            CONNECT NODE
           </button>
         </div>
       </div>
-
-      {/* Quick Links Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-        {KEY_MESSAGES.map((msg, idx) => (
-          <div key={idx} className="glass-card p-6 rounded-2xl hover:bg-white/60 transition-colors cursor-default">
-            <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm mb-4">
-              {msg.icon}
-            </div>
-            <h3 className="font-bold text-gray-800 mb-1">{msg.title}</h3>
-            <p className="text-sm text-gray-500 break-keep">{msg.desc}</p>
-          </div>
-        ))}
+      
+      {/* Bottom Scroll Indicator (Optional) */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce opacity-50">
+        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center p-2">
+          <div className="w-1 h-2 bg-white rounded-full"></div>
+        </div>
       </div>
     </div>
   );
