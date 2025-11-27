@@ -5,6 +5,8 @@ import AboutSection from './components/AboutSection';
 import TimelineSection from './components/TimelineSection';
 import GallerySection from './components/GallerySection';
 import ContactSection from './components/ContactSection';
+import LabSection from './components/LabSection';
+import SmartWorkSection from './components/SmartWorkSection';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState('home');
@@ -27,6 +29,8 @@ const App: React.FC = () => {
       case 'home': return <ProfileHero onNavigate={handleNavigate} />;
       case 'about': return <AboutSection />;
       case 'journey': return <TimelineSection />;
+      case 'lab': return <LabSection />;
+      case 'solution': return <SmartWorkSection />;
       case 'life': return <GallerySection />;
       case 'contact': return <ContactSection />;
       default: return <ProfileHero onNavigate={handleNavigate} />;

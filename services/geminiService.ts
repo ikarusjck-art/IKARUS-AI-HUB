@@ -79,3 +79,24 @@ export const sendMessageToGemini = async (message: string): Promise<string> => {
     return "일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요.";
   }
 };
+
+// Specialized function for Smart Work tools (One-off requests)
+export const generateSmartWorkContent = async (userPrompt: string, systemRole: string): Promise<string> => {
+  const aiInstance = initializeAI();
+  if (!aiInstance) return "API 키 오류: 시스템을 초기화할 수 없습니다.";
+
+  try {
+    const response = await aiInstance.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: userPrompt,
+      config: {
+        systemInstruction: systemRole,
+        temperature: 0.7,
+      }
+    });
+    return response.text || "생성된 내용이 없습니다.";
+  } catch (error) {
+    console.error("Smart Work Gen Error:", error);
+    return "작업을 처리하는 중 오류가 발생했습니다.";
+  }
+};
